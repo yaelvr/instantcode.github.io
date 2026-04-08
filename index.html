@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debuggea tu Antojo - Documentacion de la App</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a28;
+      --border: #2a2a3a;
+      --text: #e8e8f0;
+      --text-muted: #8888a0;
+      --pink: #ff2d6a;
+      --green: #39ff14;
+      --yellow: #ffe600;
+      --purple: #b84dff;
+      --cyan: #00e5ff;
+      --orange: #f97316;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Header */
+    .doc-header {
+      text-align: center;
+      padding: 48px 0 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .doc-header img.logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .doc-header h1 {
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .doc-header .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .doc-header .version-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* TOC */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 32px;
+    }
+
+    .toc h2 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc;
+    }
+
+    .toc li {
+      counter-increment: toc;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc li:last-child { border-bottom: none; }
+
+    .toc li a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toc li a::before {
+      content: counter(toc, decimal-leading-zero);
+      color: var(--pink);
+      font-weight: 700;
+      font-size: 12px;
+      min-width: 24px;
+    }
+
+    .toc li a:hover { color: var(--pink); }
+
+    /* Sections */
+    .section {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--pink);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .section p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    /* Phone Frame */
+    .phone-frame {
+      background: #000;
+      border-radius: 28px;
+      padding: 8px;
+      margin: 20px auto;
+      max-width: 300px;
+      box-shadow: 0 0 40px rgba(255, 45, 106, 0.15), 0 20px 60px rgba(0,0,0,0.5);
+      border: 2px solid #333;
+    }
+
+    .phone-frame .notch {
+      width: 120px;
+      height: 24px;
+      background: #000;
+      border-radius: 0 0 16px 16px;
+      margin: 0 auto 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .phone-frame img {
+      width: 100%;
+      border-radius: 20px;
+      display: block;
+      margin-top: -12px;
+    }
+
+    .phone-caption {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Feature Cards */
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card .feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .feature-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* Permission Item */
+    .permission-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .permission-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .permission-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .permission-item p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    .permission-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-required {
+      background: rgba(255, 45, 106, 0.15);
+      color: var(--pink);
+      border: 1px solid rgba(255, 45, 106, 0.3);
+    }
+
+    .badge-optional {
+      background: rgba(57, 255, 20, 0.1);
+      color: var(--green);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+    }
+
+    /* Info Box */
+    .info-box {
+      background: var(--surface-2);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 16px;
+      margin: 16px 0;
+    }
+
+    .info-box.warning {
+      border-left-color: var(--yellow);
+    }
+
+    .info-box h4 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--cyan);
+    }
+
+    .info-box.warning h4 {
+      color: var(--yellow);
+    }
+
+    .info-box p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .stat-card .stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .stat-card .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Flow Steps */
+    .flow-steps {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .flow-steps::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--pink), var(--purple), var(--cyan));
+      border-radius: 1px;
+    }
+
+    .flow-step {
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .flow-step::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--pink);
+      border: 2px solid var(--bg);
+    }
+
+    .flow-step h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .flow-step p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+
+    /* Footer */
+    .doc-footer {
+      text-align: center;
+      padding: 32px 0 48px;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .doc-footer .footer-brand {
+      font-size: 16px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    /* Two column for small features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .mini-feature {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .mini-feature .emoji {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .mini-feature h4 {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .mini-feature p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* Nav indicator */
+    .nav-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin: 16px 0;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .nav-dot.active {
+      background: var(--pink);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* Tag */
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+
+    .tag-pink { background: rgba(255,45,106,0.15); color: var(--pink); }
+    .tag-green { background: rgba(57,255,20,0.1); color: var(--green); }
+    .tag-purple { background: rgba(184,77,255,0.15); color: var(--purple); }
+    .tag-yellow { background: rgba(255,230,0,0.1); color: var(--yellow); }
+    .tag-orange { background: rgba(249,115,22,0.15); color: var(--orange); }
+    .tag-cyan { background: rgba(0,229,255,0.15); color: var(--cyan); }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="doc-header">
+    <div style="font-size: 48px; margin-bottom: 12px;">🍜</div>
+    <h1>Debuggea tu Antojo</h1>
+    <div class="subtitle">Maruchan x Talent Land 2026</div>
+    <div class="version-badge">PWA v1.0 - Abril 2026</div>
+  </header>
+
+  <!-- ==================== TOC ==================== -->
+  <nav class="toc">
+    <h2>Contenido</h2>
+    <ol>
+      <li><a href="#overview">Descripcion General</a></li>
+      <li><a href="#install">Instalacion como PWA</a></li>
+      <li><a href="#permissions">Permisos Solicitados</a></li>
+      <li><a href="#onboarding">Registro y Onboarding</a></li>
+      <li><a href="#home">Pantalla Principal (Home)</a></li>
+      <li><a href="#coupons">Cupones Flash</a></li>
+      <li><a href="#challenges">Retos y Trivias</a></li>
+      <li><a href="#map">Mapa del Evento</a></li>
+      <li><a href="#achievements">Logros</a></li>
+      <li><a href="#feed">Event Feed</a></li>
+      <li><a href="#agenda">Agenda del Evento</a></li>
+      <li><a href="#avatar">Personalizacion de Avatar</a></li>
+      <li><a href="#profile">Perfil del Jugador</a></li>
+      <li><a href="#navigation">Navegacion</a></li>
+      <li><a href="#tech">Datos Tecnicos</a></li>
+    </ol>
+  </nav>
+
+  <!-- ==================== 1. OVERVIEW ==================== -->
+  <section class="section" id="overview">
+    <div class="section-label">01 / Introduccion</div>
+    <h2>Descripcion General</h2>
+    <p>
+      <strong>Debuggea tu Antojo</strong> es una Progressive Web App (PWA) creada como companion app oficial de Maruchan para el evento Talent Land 2026 en Expo Santa Fe, CDMX.
+    </p>
+    <p>
+      La aplicacion permite a los asistentes del evento interactuar con la marca Maruchan a traves de cupones flash, retos, trivias, logros desbloqueables, un mapa interactivo del venue y notificaciones push en tiempo real.
+    </p>
+
+    <div class="info-box">
+      <h4>Que es una PWA?</h4>
+      <p>Una Progressive Web App funciona como una app nativa desde el navegador. No requiere descarga desde tiendas de aplicaciones. Se accede desde un enlace web y puede instalarse en la pantalla de inicio del telefono.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">0 MB</div>
+        <div class="stat-label">Descarga</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">13+</div>
+        <div class="stat-label">Pantallas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Dias de evento</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">10</div>
+        <div class="stat-label">Estaciones</div>
+      </div>
+    </div>
+
+    <div class="features-grid">
+      <div class="mini-feature">
+        <div class="emoji">🎟️</div>
+        <h4>Cupones Flash</h4>
+        <p>Ofertas con tiempo limitado</p>
+      </div>
+      <div class="mini-feature">
+        <div class="emoji">⚡</div>
+        <h4>Retos</h4>
+        <p>Trivias y desafios</p>
+      </div>
+      <div class="mini-feature">
+        <div class="emoji">🏆</div>
+        <h4>Logros</h4>
+        <p>Badges desbloqueables</p>
+      </div>
+      <div class="mini-feature">
+        <div class="emoji">🗺️</div>
+        <h4>Mapa</h4>
+        <p>Estaciones Maruchan</p>
+      </div>
+      <div class="mini-feature">
+        <div class="emoji">🔔</div>
+        <h4>Push</h4>
+        <p>Alertas en tiempo real</p>
+      </div>
+      <div class="mini-feature">
+        <div class="emoji">📅</div>
+        <h4>Agenda</h4>
+        <p>Horarios del evento</p>
+      </div>
+      <div class="mini-feature">
+        <div class="emoji">🎮</div>
+        <h4>Avatar</h4>
+        <p>Personaliza tu personaje</p>
+      </div>
+      <div class="mini-feature">
+        <div class="emoji">📡</div>
+        <h4>Feed</h4>
+        <p>Actualizaciones en vivo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 2. INSTALL ==================== -->
+  <section class="section" id="install">
+    <div class="section-label">02 / Instalacion</div>
+    <h2>Instalacion como PWA</h2>
+    <p>
+      La app no requiere descarga desde App Store ni Google Play. Se instala directamente desde el navegador del telefono.
+    </p>
+
+    <div class="info-box">
+      <h4>Requisitos</h4>
+      <p>Navegador Chrome (Android) o Safari (iOS) actualizado. Conexion a internet para el primer acceso.</p>
+    </div>
+
+    <h3 style="font-size: 14px; margin: 16px 0 12px; font-weight: 700;">Pasos para instalar:</h3>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <h4>1. Abrir el enlace</h4>
+        <p>Abre el URL de la app en Chrome o Safari desde tu celular.</p>
+      </div>
+      <div class="flow-step">
+        <h4>2. Agregar a pantalla de inicio</h4>
+        <p><strong>Android:</strong> Toca el menu (tres puntos) > "Agregar a pantalla de inicio".<br>
+        <strong>iOS:</strong> Toca el boton de compartir > "Agregar a inicio".</p>
+      </div>
+      <div class="flow-step">
+        <h4>3. Abrir como app</h4>
+        <p>La app aparecera como un icono en tu pantalla de inicio. Se abre en pantalla completa sin barra de navegador.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3. PERMISSIONS ==================== -->
+  <section class="section" id="permissions">
+    <div class="section-label">03 / Permisos</div>
+    <h2>Permisos Solicitados</h2>
+    <p>
+      La app solicita un unico permiso para funcionar de forma optima. Este permiso es <strong>opcional</strong> y puede ser activado o desactivado en cualquier momento.
+    </p>
+
+    <div class="permission-item">
+      <div class="permission-icon" style="background: rgba(255,45,106,0.15);">🔔</div>
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <h4>Notificaciones Push</h4>
+          <span class="permission-badge badge-optional">Opcional</span>
+        </div>
+        <p>Permite recibir alertas en tiempo real sobre cupones flash, nuevos retos y actualizaciones de estaciones Maruchan.</p>
+      </div>
+    </div>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='500'%3E%3Crect fill='%23050508' width='300' height='500'/%3E%3Ctext x='150' y='100' fill='%23ff2d6a' font-size='40' text-anchor='middle'%3E🔔%3C/text%3E%3Ctext x='150' y='145' fill='%23fff' font-size='16' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EDON'T MISS%3C/text%3E%3Ctext x='150' y='168' fill='%23ffe600' font-size='16' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EANYTHING%3C/text%3E%3Ctext x='150' y='200' fill='%238888a0' font-size='10' text-anchor='middle' font-family='sans-serif'%3EActiva alertas para recibir cupones flash,%3C/text%3E%3Ctext x='150' y='215' fill='%238888a0' font-size='10' text-anchor='middle' font-family='sans-serif'%3Eretos y estaciones Maruchan.%3C/text%3E%3Crect x='40' y='250' width='220' height='40' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='75' y='275' fill='%23e8e8f0' font-size='10' font-family='sans-serif'%3E🎟 Cupones flash con tiempo limitado%3C/text%3E%3Crect x='40' y='300' width='220' height='40' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='75' y='325' fill='%23e8e8f0' font-size='10' font-family='sans-serif'%3E⚡ Nuevos retos y trivias disponibles%3C/text%3E%3Crect x='40' y='350' width='220' height='40' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='75' y='375' fill='%23e8e8f0' font-size='10' font-family='sans-serif'%3E📍 Estaciones Maruchan cerca de ti%3C/text%3E%3Crect x='30' y='420' width='240' height='44' rx='10' fill='%23ff2d6a'/%3E%3Ctext x='150' y='447' fill='white' font-size='13' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E🔔 ENABLE ALERTS%3C/text%3E%3Ctext x='150' y='480' fill='%238888a0' font-size='10' text-anchor='middle' font-family='sans-serif'%3ESKIP FOR NOW%3C/text%3E%3C/svg%3E" alt="Pantalla de permisos">
+    </div>
+    <div class="phone-caption">Pantalla de solicitud de permisos de notificaciones</div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Para que sirve cada alerta:</h3>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(255,45,106,0.15);">🎟️</div>
+      <h3>Cupones Flash</h3>
+      <p>Recibe alertas instantaneas cuando un nuevo cupon de Maruchan esta disponible. Los cupones tienen tiempo y usos limitados.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(255,230,0,0.1);">⚡</div>
+      <h3>Nuevos Retos</h3>
+      <p>Enterate cuando se publiquen nuevas trivias o desafios para ganar puntos y desbloquear logros.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: rgba(57,255,20,0.1);">📍</div>
+      <h3>Estaciones Maruchan</h3>
+      <p>Recibe actualizaciones sobre la disponibilidad de las estaciones Maruchan en el venue (abiertas, ocupadas, cerradas).</p>
+    </div>
+
+    <div class="info-box warning">
+      <h4>Puedes cambiar esto despues</h4>
+      <p>Si decides saltar este paso, puedes activar las notificaciones en cualquier momento desde tu perfil dentro de la app.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Permisos que NO solicita la app:</h3>
+
+    <div class="permission-item">
+      <div class="permission-icon" style="background: rgba(57,255,20,0.05);">📷</div>
+      <div>
+        <h4>Camara</h4>
+        <p>La app no accede a tu camara.</p>
+      </div>
+    </div>
+    <div class="permission-item">
+      <div class="permission-icon" style="background: rgba(57,255,20,0.05);">📍</div>
+      <div>
+        <h4>Ubicacion / GPS</h4>
+        <p>No se rastrea tu ubicacion.</p>
+      </div>
+    </div>
+    <div class="permission-item">
+      <div class="permission-icon" style="background: rgba(57,255,20,0.05);">👤</div>
+      <div>
+        <h4>Contactos</h4>
+        <p>No accede a tus contactos.</p>
+      </div>
+    </div>
+    <div class="permission-item">
+      <div class="permission-icon" style="background: rgba(57,255,20,0.05);">🎙️</div>
+      <div>
+        <h4>Microfono</h4>
+        <p>No accede a tu microfono.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. ONBOARDING ==================== -->
+  <section class="section" id="onboarding">
+    <div class="section-label">04 / Registro</div>
+    <h2>Registro y Onboarding</h2>
+    <p>
+      El proceso de registro es rapido y no requiere email, contrasena ni datos personales. Solo necesitas un nickname y elegir tu modo de juego.
+    </p>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Flujo de registro:</h3>
+
+    <div class="flow-steps">
+      <div class="flow-step">
+        <h4>Landing Page</h4>
+        <p>Pantalla de bienvenida con el boton "INSERT COIN" para comenzar.</p>
+      </div>
+      <div class="flow-step">
+        <h4>Paso 1: Player Name</h4>
+        <p>Ingresa tu nickname para el evento (2-20 caracteres).</p>
+      </div>
+      <div class="flow-step">
+        <h4>Paso 2: Seleccion de Modo</h4>
+        <p>Elige uno de 4 modos de jugador que personaliza tu experiencia.</p>
+      </div>
+      <div class="flow-step">
+        <h4>Permisos</h4>
+        <p>Opcionalmente activa notificaciones push.</p>
+      </div>
+      <div class="flow-step">
+        <h4>Home</h4>
+        <p>Listo! Accedes a la app completa.</p>
+      </div>
+    </div>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='500'%3E%3Crect fill='%23050508' width='300' height='500'/%3E%3Ctext x='150' y='60' fill='%23e8e8f0' font-size='14' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EREADY, %3C/text%3E%3Ctext x='210' y='60' fill='%2339ff14' font-size='14' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EPLAYER?%3C/text%3E%3Ctext x='150' y='82' fill='%238888a0' font-size='11' text-anchor='middle' font-family='sans-serif'%3ESELECT YOUR MODE%3C/text%3E%3Crect x='20' y='105' width='125' height='100' rx='10' fill='%230a0f1d' stroke='%23f97316' stroke-width='1'/%3E%3Ctext x='82' y='145' fill='%23f97316' font-size='24' text-anchor='middle'%3E⚡%3C/text%3E%3Ctext x='82' y='170' fill='%23f97316' font-size='11' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EENERGIA%3C/text%3E%3Ctext x='82' y='188' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3EPara los que no paran%3C/text%3E%3Crect x='155' y='105' width='125' height='100' rx='10' fill='%230a0f1d' stroke='%23b84dff' stroke-width='1'/%3E%3Ctext x='217' y='145' fill='%23b84dff' font-size='24' text-anchor='middle'%3E🎮%3C/text%3E%3Ctext x='217' y='170' fill='%23b84dff' font-size='11' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EGAMER%3C/text%3E%3Ctext x='217' y='188' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3ERetos y logros nivel pro%3C/text%3E%3Crect x='20' y='215' width='125' height='100' rx='10' fill='%230a0f1d' stroke='%2300e5ff' stroke-width='1'/%3E%3Ctext x='82' y='255' fill='%2300e5ff' font-size='24' text-anchor='middle'%3E🌙%3C/text%3E%3Ctext x='82' y='280' fill='%2300e5ff' font-size='11' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EDESVELO%3C/text%3E%3Ctext x='82' y='298' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3EOfertas nocturnas%3C/text%3E%3Crect x='155' y='215' width='125' height='100' rx='10' fill='%230a0f1d' stroke='%2339ff14' stroke-width='1'/%3E%3Ctext x='217' y='255' fill='%2339ff14' font-size='24' text-anchor='middle'%3E👥%3C/text%3E%3Ctext x='217' y='280' fill='%2339ff14' font-size='11' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3ESQUAD%3C/text%3E%3Ctext x='217' y='298' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3EMejor con tu crew%3C/text%3E%3Crect x='20' y='350' width='260' height='44' rx='10' fill='%23ff2d6a'/%3E%3Ctext x='150' y='377' fill='white' font-size='13' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3ESTART GAME 🎮%3C/text%3E%3C/svg%3E" alt="Seleccion de modo">
+    </div>
+    <div class="phone-caption">Paso 2: Seleccion del modo de jugador</div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Modos disponibles:</h3>
+
+    <div class="feature-card">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span class="tag tag-orange">ENERGIA</span>
+      </div>
+      <h3>⚡ Para los que no paran</h3>
+      <p>Modo enfocado en energia y actividades continuas durante todo el evento.</p>
+    </div>
+
+    <div class="feature-card">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span class="tag tag-purple">GAMER</span>
+      </div>
+      <h3>🎮 Retos y logros nivel pro</h3>
+      <p>Para quienes quieren completar todos los retos y desbloquear todos los logros.</p>
+    </div>
+
+    <div class="feature-card">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span class="tag tag-cyan">DESVELO</span>
+      </div>
+      <h3>🌙 Las mejores ofertas nocturnas</h3>
+      <p>Enfocado en las actividades y ofertas que suceden de noche durante el evento.</p>
+    </div>
+
+    <div class="feature-card">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span class="tag tag-green">SQUAD</span>
+      </div>
+      <h3>👥 Mejor con tu crew</h3>
+      <p>Modo social para disfrutar el evento junto con tu grupo de amigos.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 5. HOME ==================== -->
+  <section class="section" id="home">
+    <div class="section-label">05 / Principal</div>
+    <h2>Pantalla Principal (Home)</h2>
+    <p>
+      El Home es el centro de control de la app. Muestra un resumen de todo lo importante: cupones activos, retos disponibles, accesos rapidos y contenido destacado.
+    </p>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='520'%3E%3Crect fill='%23050508' width='300' height='520'/%3E%3Ctext x='20' y='30' fill='%238888a0' font-size='10' font-family='sans-serif'%3EWELCOME BACK,%3C/text%3E%3Ctext x='20' y='52' fill='%23e8e8f0' font-size='18' font-weight='bold' font-family='sans-serif'%3EPlayer1%3C/text%3E%3Crect x='105' y='37' width='55' height='20' rx='4' fill='rgba(184,77,255,0.2)'/%3E%3Ctext x='132' y='51' fill='%23b84dff' font-size='9' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EGAMER%3C/text%3E%3Crect x='15' y='72' width='270' height='45' rx='8' fill='%230a0f1d' stroke='%23ff2d6a' stroke-width='1'/%3E%3Ctext x='50' y='98' fill='%23ff2d6a' font-size='11' font-weight='bold' font-family='sans-serif'%3EENABLE ALERTS%3C/text%3E%3Ctext x='30' y='95' fill='%23ff2d6a' font-size='16'%3E🔔%3C/text%3E%3Ctext x='20' y='145' fill='%23ff2d6a' font-size='12' font-weight='bold' font-family='sans-serif'%3E🎟 FLASH COUPONS%3C/text%3E%3Ctext x='230' y='145' fill='%23ffe600' font-size='10' font-family='sans-serif'%3EVIEW ALL →%3C/text%3E%3Crect x='15' y='158' width='270' height='50' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='25' y='180' fill='%23e8e8f0' font-size='12' font-weight='bold' font-family='sans-serif'%3E2x1 Maruchan%3C/text%3E%3Ctext x='25' y='196' fill='%238888a0' font-size='9' font-family='sans-serif'%3ELleva dos sopas por el precio de una%3C/text%3E%3Crect x='220' y='168' width='50' height='24' rx='4' fill='rgba(57,255,20,0.15)'/%3E%3Ctext x='245' y='184' fill='%2339ff14' font-size='9' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EDOBLE%3C/text%3E%3Ctext x='20' y='240' fill='%23ffe600' font-size='12' font-weight='bold' font-family='sans-serif'%3E⚡ CHALLENGES%3C/text%3E%3Ctext x='230' y='240' fill='%23ffe600' font-size='10' font-family='sans-serif'%3EVIEW ALL →%3C/text%3E%3Crect x='15' y='252' width='270' height='40' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='25' y='276' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3ERecluta a tu squad%3C/text%3E%3Crect x='225' y='262' width='50' height='20' rx='4' fill='rgba(57,255,20,0.1)'/%3E%3Ctext x='250' y='276' fill='%2339ff14' font-size='9' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E+30PTS%3C/text%3E%3Crect x='15' y='298' width='270' height='40' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='25' y='322' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3ECuantos sabores tiene Maruchan?%3C/text%3E%3Crect x='225' y='308' width='50' height='20' rx='4' fill='rgba(184,77,255,0.15)'/%3E%3Ctext x='250' y='322' fill='%23b84dff' font-size='9' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E+15PTS%3C/text%3E%3Ctext x='20' y='370' fill='%2339ff14' font-size='12' font-weight='bold' font-family='sans-serif'%3E🎯 EXPLORE%3C/text%3E%3Crect x='15' y='385' width='65' height='55' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='47' y='410' fill='%23ff2d6a' font-size='16' text-anchor='middle'%3E📅%3C/text%3E%3Ctext x='47' y='430' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EAGENDA%3C/text%3E%3Crect x='85' y='385' width='65' height='55' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='117' y='410' fill='%23ffe600' font-size='16' text-anchor='middle'%3E🏆%3C/text%3E%3Ctext x='117' y='430' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3ELOGROS%3C/text%3E%3Crect x='155' y='385' width='65' height='55' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='187' y='410' fill='%2339ff14' font-size='16' text-anchor='middle'%3E🗺️%3C/text%3E%3Ctext x='187' y='430' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EMAPA%3C/text%3E%3Crect x='225' y='385' width='65' height='55' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='257' y='410' fill='%23b84dff' font-size='16' text-anchor='middle'%3E😎%3C/text%3E%3Ctext x='257' y='430' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EAVATAR%3C/text%3E%3Crect x='0' y='480' width='300' height='40' fill='%230a0a12'/%3E%3Ctext x='35' y='502' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3EHOME%3C/text%3E%3Ctext x='105' y='502' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3EFEED%3C/text%3E%3Ctext x='150' y='502' fill='%2339ff14' font-size='9' text-anchor='middle' font-family='sans-serif'%3ECAM%3C/text%3E%3Ctext x='200' y='502' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3EMAP%3C/text%3E%3Ctext x='265' y='502' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3EP1%3C/text%3E%3C/svg%3E" alt="Pantalla Home">
+    </div>
+    <div class="phone-caption">Pantalla Home con cupones, retos y accesos rapidos</div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Secciones del Home:</h3>
+
+    <div class="feature-card">
+      <h3>Bienvenida personalizada</h3>
+      <p>Muestra tu nickname y el badge del modo seleccionado (Gamer, Energia, Desvelo o Squad).</p>
+    </div>
+    <div class="feature-card">
+      <h3>Banner de alertas</h3>
+      <p>Si no has activado notificaciones, aparece un recordatorio con acceso directo a configurarlas.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Flash Coupons</h3>
+      <p>Muestra los cupones activos mas recientes con su codigo y descripcion.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Challenges</h3>
+      <p>Los 3 retos principales disponibles con los puntos que puedes ganar.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Explore</h3>
+      <p>Grid de accesos rapidos a Agenda, Logros, Mapa y Avatar.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Featured</h3>
+      <p>Accesos a Event Feed (speakers, retos, concursos en vivo) y Photo Booth.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 6. COUPONS ==================== -->
+  <section class="section" id="coupons">
+    <div class="section-label">06 / Cupones</div>
+    <h2>Cupones Flash</h2>
+    <p>
+      Los cupones flash son ofertas con tiempo y usos limitados que puedes canjear en las estaciones Maruchan del evento.
+    </p>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450'%3E%3Crect fill='%23050508' width='300' height='450'/%3E%3Ctext x='150' y='60' fill='%23ff2d6a' font-size='32' text-anchor='middle'%3E🎟️%3C/text%3E%3Ctext x='150' y='95' fill='%23e8e8f0' font-size='18' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E2x1 Maruchan%3C/text%3E%3Ctext x='150' y='115' fill='%238888a0' font-size='11' text-anchor='middle' font-family='sans-serif'%3ELleva dos sopas por el precio de una%3C/text%3E%3Crect x='40' y='140' width='220' height='60' rx='8' fill='%230a0f1d' stroke='%23ffe600' stroke-dasharray='5,5'/%3E%3Ctext x='150' y='163' fill='%238888a0' font-size='10' text-anchor='middle' font-family='sans-serif'%3ECODE%3C/text%3E%3Ctext x='150' y='188' fill='%23ffe600' font-size='22' font-weight='bold' text-anchor='middle' font-family='monospace'%3EDOBLE%3C/text%3E%3Ctext x='60' y='230' fill='%238888a0' font-size='10' font-family='sans-serif'%3ESTATUS%3C/text%3E%3Crect x='195' y='218' width='55' height='18' rx='4' fill='rgba(57,255,20,0.15)'/%3E%3Ctext x='222' y='231' fill='%2339ff14' font-size='9' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EACTIVE%3C/text%3E%3Ctext x='60' y='258' fill='%238888a0' font-size='10' font-family='sans-serif'%3EEXPIRES%3C/text%3E%3Ctext x='220' y='258' fill='%23e8e8f0' font-size='10' text-anchor='middle' font-family='sans-serif'%3E8 abr 2026%3C/text%3E%3Ctext x='60' y='286' fill='%238888a0' font-size='10' font-family='sans-serif'%3EREMAINING%3C/text%3E%3Ctext x='222' y='286' fill='%23e8e8f0' font-size='10' text-anchor='middle' font-family='sans-serif'%3E100 / 100%3C/text%3E%3Crect x='30' y='320' width='240' height='48' rx='12' fill='%23ff2d6a'/%3E%3Ctext x='150' y='350' fill='white' font-size='14' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E🎟 REDEEM%3C/text%3E%3C/svg%3E" alt="Detalle de cupon">
+    </div>
+    <div class="phone-caption">Detalle de cupon con codigo y boton de canje</div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Como funciona:</h3>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <h4>Ver cupones disponibles</h4>
+        <p>Desde Home o la seccion Cupones, ve la lista de cupones activos.</p>
+      </div>
+      <div class="flow-step">
+        <h4>Ver detalle</h4>
+        <p>Toca un cupon para ver su codigo, fecha de expiracion y usos restantes.</p>
+      </div>
+      <div class="flow-step">
+        <h4>Canjear</h4>
+        <p>Presiona "REDEEM" y muestra el codigo en la estacion Maruchan mas cercana.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h4>Estados de cupones</h4>
+      <p><span class="tag tag-green">ACTIVE</span> Disponible para canjear<br>
+      <span class="tag tag-pink">EXPIRED</span> Ya vencio el tiempo<br>
+      <span class="tag" style="background: rgba(128,128,128,0.15); color: #888;">SOLD OUT</span> Se agotaron los usos</p>
+    </div>
+  </section>
+
+  <!-- ==================== 7. CHALLENGES ==================== -->
+  <section class="section" id="challenges">
+    <div class="section-label">07 / Retos</div>
+    <h2>Retos y Trivias</h2>
+    <p>
+      Participa en retos para ganar puntos y desbloquear logros. Hay tres tipos de retos disponibles durante el evento.
+    </p>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='480'%3E%3Crect fill='%23050508' width='300' height='480'/%3E%3Ctext x='20' y='35' fill='%23ffe600' font-size='14' font-weight='bold' font-family='sans-serif'%3E⚡ CHALLENGES%3C/text%3E%3Ctext x='20' y='52' fill='%238888a0' font-size='9' font-family='sans-serif'%3EGANA PUNTOS Y DESBLOQUEA LOGROS%3C/text%3E%3Crect x='15' y='70' width='270' height='75' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='55' y='100' fill='%2339ff14' font-size='20' text-anchor='middle'%3E👥%3C/text%3E%3Crect x='70' y='79' width='50' height='16' rx='4' fill='rgba(57,255,20,0.15)'/%3E%3Ctext x='95' y='91' fill='%2339ff14' font-size='8' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3ESQUAD%3C/text%3E%3Ctext x='70' y='108' fill='%23e8e8f0' font-size='12' font-weight='bold' font-family='sans-serif'%3ERecluta a tu squad%3C/text%3E%3Ctext x='70' y='125' fill='%238888a0' font-size='9' font-family='sans-serif'%3EComparte el QR con 3 amigos%3C/text%3E%3Ctext x='250' y='108' fill='%23ffe600' font-size='11' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E+30 PTS%3C/text%3E%3Crect x='15' y='155' width='270' height='75' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='55' y='185' fill='%23b84dff' font-size='20' text-anchor='middle'%3E🧠%3C/text%3E%3Crect x='70' y='164' width='50' height='16' rx='4' fill='rgba(184,77,255,0.15)'/%3E%3Ctext x='95' y='176' fill='%23b84dff' font-size='8' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3ETRIVIA%3C/text%3E%3Ctext x='70' y='193' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3ECuantos sabores tiene Maruchan?%3C/text%3E%3Ctext x='70' y='210' fill='%238888a0' font-size='9' font-family='sans-serif'%3ETrivia rapida sobre Maruchan%3C/text%3E%3Ctext x='250' y='193' fill='%23ffe600' font-size='11' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E+15 PTS%3C/text%3E%3Crect x='15' y='240' width='270' height='75' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='55' y='270' fill='%23f97316' font-size='20' text-anchor='middle'%3E📸%3C/text%3E%3Crect x='70' y='249' width='55' height='16' rx='4' fill='rgba(249,115,22,0.15)'/%3E%3Ctext x='97' y='261' fill='%23f97316' font-size='8' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EACTION%3C/text%3E%3Ctext x='70' y='278' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3EFoto en la estacion%3C/text%3E%3Ctext x='70' y='295' fill='%238888a0' font-size='9' font-family='sans-serif'%3ETomate una foto en cualquier estacion%3C/text%3E%3Ctext x='250' y='278' fill='%23ffe600' font-size='11' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E+20 PTS%3C/text%3E%3C/svg%3E" alt="Lista de retos">
+    </div>
+    <div class="phone-caption">Lista de retos con tipos y puntos</div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Tipos de retos:</h3>
+
+    <div class="feature-card">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span class="tag tag-purple">TRIVIA</span>
+      </div>
+      <h3>Preguntas de conocimiento</h3>
+      <p>Responde preguntas de opcion multiple sobre Maruchan, cultura ramen y mas. Obten puntos por respuestas correctas.</p>
+    </div>
+
+    <div class="feature-card">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span class="tag tag-orange">ACTION</span>
+      </div>
+      <h3>Desafios de accion</h3>
+      <p>Completa actividades fisicas en el evento como visitar estaciones o tomar fotos.</p>
+    </div>
+
+    <div class="feature-card">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span class="tag tag-green">SQUAD</span>
+      </div>
+      <h3>Retos en equipo</h3>
+      <p>Actividades para completar con tu grupo de amigos, como reclutar nuevos jugadores.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 8. MAP ==================== -->
+  <section class="section" id="map">
+    <div class="section-label">08 / Mapa</div>
+    <h2>Mapa del Evento</h2>
+    <p>
+      Mapa interactivo SVG del venue (Expo Santa Fe, CDMX) con 15+ zonas del evento y la ubicacion de todas las estaciones Maruchan.
+    </p>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect fill='%23050508' width='300' height='420'/%3E%3Ctext x='20' y='30' fill='%2339ff14' font-size='14' font-weight='bold' font-family='sans-serif'%3E🗺 VENUE MAP%3C/text%3E%3Ctext x='20' y='48' fill='%238888a0' font-size='9' font-family='sans-serif'%3EEXPO SANTA FE, CDMX%3C/text%3E%3Crect x='15' y='65' width='270' height='200' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Crect x='25' y='80' width='80' height='40' rx='4' fill='rgba(255,45,106,0.1)' stroke='%23ff2d6a' stroke-width='0.5'/%3E%3Ctext x='65' y='103' fill='%23ff2d6a' font-size='7' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EMAIN STAGE%3C/text%3E%3Crect x='115' y='80' width='60' height='30' rx='4' fill='rgba(57,255,20,0.05)' stroke='%232a2a3a' stroke-width='0.5'/%3E%3Ctext x='145' y='98' fill='%238888a0' font-size='6' text-anchor='middle' font-family='sans-serif'%3ETALENT LAND%3C/text%3E%3Crect x='185' y='80' width='90' height='40' rx='4' fill='rgba(0,229,255,0.1)' stroke='%2300e5ff' stroke-width='0.5'/%3E%3Ctext x='230' y='100' fill='%2300e5ff' font-size='7' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EFOOD COURT%3C/text%3E%3Crect x='25' y='130' width='70' height='35' rx='4' fill='rgba(184,77,255,0.1)' stroke='%23b84dff' stroke-width='0.5'/%3E%3Ctext x='60' y='150' fill='%23b84dff' font-size='7' text-anchor='middle' font-family='sans-serif'%3EDEV LAND%3C/text%3E%3Crect x='105' y='130' width='80' height='35' rx='4' fill='rgba(249,115,22,0.1)' stroke='%23f97316' stroke-width='0.5'/%3E%3Ctext x='145' y='150' fill='%23f97316' font-size='7' text-anchor='middle' font-family='sans-serif'%3EGAMER ZONE%3C/text%3E%3Crect x='195' y='130' width='80' height='35' rx='4' fill='rgba(255,230,0,0.1)' stroke='%23ffe600' stroke-width='0.5'/%3E%3Ctext x='235' y='150' fill='%23ffe600' font-size='7' text-anchor='middle' font-family='sans-serif'%3ECREATOR LAND%3C/text%3E%3Crect x='70' y='175' width='80' height='35' rx='4' fill='rgba(57,255,20,0.1)' stroke='%2339ff14' stroke-width='0.5'/%3E%3Ctext x='110' y='195' fill='%2339ff14' font-size='7' text-anchor='middle' font-family='sans-serif'%3EFORO CENTRAL%3C/text%3E%3Crect x='160' y='175' width='80' height='35' rx='4' fill='rgba(0,229,255,0.1)' stroke='%2300e5ff' stroke-width='0.5'/%3E%3Ctext x='200' y='195' fill='%2300e5ff' font-size='7' text-anchor='middle' font-family='sans-serif'%3EFUTURE LAND%3C/text%3E%3Ccircle cx='62' cy='105' r='5' fill='%23ffe600' stroke='%23050508' stroke-width='1'/%3E%3Ctext x='62' y='108' fill='%23050508' font-size='5' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EM%3C/text%3E%3Ccircle cx='145' cy='155' r='5' fill='%23ffe600' stroke='%23050508' stroke-width='1'/%3E%3Ctext x='145' y='158' fill='%23050508' font-size='5' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EM%3C/text%3E%3Ccircle cx='200' cy='195' r='5' fill='%23ffe600' stroke='%23050508' stroke-width='1'/%3E%3Ctext x='200' y='198' fill='%23050508' font-size='5' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EM%3C/text%3E%3Crect x='20' y='240' width='8' height='8' rx='2' fill='%23ffe600'/%3E%3Ctext x='34' y='247' fill='%238888a0' font-size='8' font-family='sans-serif'%3EMARUCHAN%3C/text%3E%3Ccircle cx='95' cy='244' r='3' fill='%2339ff14'/%3E%3Ctext x='104' y='247' fill='%238888a0' font-size='8' font-family='sans-serif'%3EOPEN%3C/text%3E%3Ccircle cx='140' cy='244' r='3' fill='%23ffe600'/%3E%3Ctext x='149' y='247' fill='%238888a0' font-size='8' font-family='sans-serif'%3EBUSY%3C/text%3E%3Ctext x='20' y='290' fill='%23e8e8f0' font-size='12' font-weight='bold' font-family='sans-serif'%3E10 MARUCHAN STATIONS%3C/text%3E%3Crect x='15' y='300' width='130' height='40' rx='6' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ccircle cx='135' cy='310' r='3' fill='%2339ff14'/%3E%3Ctext x='25' y='316' fill='%23e8e8f0' font-size='9' font-weight='bold' font-family='sans-serif'%3ECreator Ramen Bar%3C/text%3E%3Ctext x='25' y='330' fill='%23ff2d6a' font-size='8' font-family='sans-serif'%3ECreator Land%3C/text%3E%3Crect x='155' y='300' width='130' height='40' rx='6' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ccircle cx='275' cy='310' r='3' fill='%2339ff14'/%3E%3Ctext x='165' y='316' fill='%23e8e8f0' font-size='9' font-weight='bold' font-family='sans-serif'%3EForo Ramen%3C/text%3E%3Ctext x='165' y='330' fill='%2339ff14' font-size='8' font-family='sans-serif'%3EForo Central%3C/text%3E%3Crect x='15' y='350' width='130' height='40' rx='6' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ccircle cx='135' cy='360' r='3' fill='%23ffe600'/%3E%3Ctext x='25' y='366' fill='%23e8e8f0' font-size='9' font-weight='bold' font-family='sans-serif'%3EGG Noodles%3C/text%3E%3Ctext x='25' y='380' fill='%23f97316' font-size='8' font-family='sans-serif'%3EGamer Zone%3C/text%3E%3Crect x='155' y='350' width='130' height='40' rx='6' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ccircle cx='275' cy='360' r='3' fill='%2339ff14'/%3E%3Ctext x='165' y='366' fill='%23e8e8f0' font-size='9' font-weight='bold' font-family='sans-serif'%3EHack Fuel 24/7%3C/text%3E%3Ctext x='165' y='380' fill='%23b84dff' font-size='8' font-family='sans-serif'%3EGenius Arena%3C/text%3E%3C/svg%3E" alt="Mapa del venue">
+    </div>
+    <div class="phone-caption">Mapa interactivo con estaciones Maruchan y disponibilidad</div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Funciones del mapa:</h3>
+    <div class="feature-card">
+      <h3>Zonas interactivas</h3>
+      <p>Toca cualquier zona del mapa para ver informacion sobre la estacion Maruchan mas cercana.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Disponibilidad en tiempo real</h3>
+      <p>Cada estacion muestra su estado actual:<br>
+      <span style="color: var(--green);">● OPEN</span> - Disponible |
+      <span style="color: var(--yellow);">● BUSY</span> - Ocupada |
+      <span style="color: var(--pink);">● OFF</span> - Cerrada</p>
+    </div>
+    <div class="feature-card">
+      <h3>Lista de estaciones</h3>
+      <p>Debajo del mapa hay una lista con las 10 estaciones Maruchan y su zona correspondiente.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 9. ACHIEVEMENTS ==================== -->
+  <section class="section" id="achievements">
+    <div class="section-label">09 / Logros</div>
+    <h2>Logros</h2>
+    <p>
+      Desbloquea badges completando diferentes actividades durante el evento. Hay 6 logros disponibles.
+    </p>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23050508' width='300' height='400'/%3E%3Ctext x='20' y='30' fill='%23ffe600' font-size='14' font-weight='bold' font-family='sans-serif'%3E🏆 ACHIEVEMENTS%3C/text%3E%3Ctext x='20' y='48' fill='%238888a0' font-size='9' font-family='sans-serif'%3E0/6 UNLOCKED%3C/text%3E%3Crect x='15' y='58' width='270' height='6' rx='3' fill='%231a1a28'/%3E%3Crect x='15' y='58' width='0' height='6' rx='3' fill='%2339ff14'/%3E%3Crect x='15' y='80' width='130' height='100' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='80' y='115' fill='%23555' font-size='24' text-anchor='middle'%3E🔒%3C/text%3E%3Ctext x='80' y='140' fill='%23e8e8f0' font-size='10' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EExplorador%3C/text%3E%3Ctext x='80' y='155' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EVisita todas las estaciones%3C/text%3E%3Crect x='155' y='80' width='130' height='100' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='220' y='115' fill='%23555' font-size='24' text-anchor='middle'%3E🔒%3C/text%3E%3Ctext x='220' y='140' fill='%23e8e8f0' font-size='10' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3ECerebro Ramen%3C/text%3E%3Ctext x='220' y='155' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EResponde 3 trivias bien%3C/text%3E%3Crect x='15' y='190' width='130' height='100' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='80' y='225' fill='%23555' font-size='24' text-anchor='middle'%3E🔒%3C/text%3E%3Ctext x='80' y='250' fill='%23e8e8f0' font-size='10' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EFlash Master%3C/text%3E%3Ctext x='80' y='265' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3ECanjea 3 cupones flash%3C/text%3E%3Crect x='155' y='190' width='130' height='100' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='220' y='225' fill='%23555' font-size='24' text-anchor='middle'%3E🔒%3C/text%3E%3Ctext x='220' y='250' fill='%23e8e8f0' font-size='10' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3ENocturno%3C/text%3E%3Ctext x='220' y='265' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3ECupon despues de medianoche%3C/text%3E%3Crect x='15' y='300' width='130' height='85' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='80' y='335' fill='%23555' font-size='24' text-anchor='middle'%3E🔒%3C/text%3E%3Ctext x='80' y='355' fill='%23e8e8f0' font-size='10' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EPrimer Antojo%3C/text%3E%3Ctext x='80' y='370' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3ECanjea tu primer cupon%3C/text%3E%3Crect x='155' y='300' width='130' height='85' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='220' y='335' fill='%23555' font-size='24' text-anchor='middle'%3E🔒%3C/text%3E%3Ctext x='220' y='355' fill='%23e8e8f0' font-size='10' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3ESquad Leader%3C/text%3E%3Ctext x='220' y='370' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3ECompleta un reto squad%3C/text%3E%3C/svg%3E" alt="Logros">
+    </div>
+    <div class="phone-caption">Grid de logros - se desbloquean con actividades en el evento</div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Logros disponibles:</h3>
+
+    <div class="feature-card">
+      <h3>🗺️ Explorador</h3>
+      <p>Visita todas las estaciones Maruchan en el venue.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🧠 Cerebro Ramen</h3>
+      <p>Responde correctamente 3 trivias.</p>
+    </div>
+    <div class="feature-card">
+      <h3>⚡ Flash Master</h3>
+      <p>Canjea 3 cupones flash.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🌙 Nocturno</h3>
+      <p>Activa un cupon despues de medianoche.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🎟️ Primer Antojo</h3>
+      <p>Canjea tu primer cupon.</p>
+    </div>
+    <div class="feature-card">
+      <h3>👥 Squad Leader</h3>
+      <p>Completa un reto tipo squad.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 10. FEED ==================== -->
+  <section class="section" id="feed">
+    <div class="section-label">10 / Feed</div>
+    <h2>Event Feed</h2>
+    <p>
+      Feed en tiempo real con todo lo que pasa en el evento: charlas, retos, concursos y momentos en vivo.
+    </p>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect fill='%23050508' width='300' height='420'/%3E%3Ctext x='20' y='30' fill='%2339ff14' font-size='14' font-weight='bold' font-family='sans-serif'%3E📡 EVENT FEED%3C/text%3E%3Ctext x='20' y='47' fill='%238888a0' font-size='9' font-family='sans-serif'%3ESPEAKERS, RETOS, CONCURSOS Y LIVE%3C/text%3E%3Crect x='15' y='58' width='45' height='24' rx='12' fill='%2339ff14'/%3E%3Ctext x='37' y='74' fill='%23050508' font-size='9' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EALL%3C/text%3E%3Crect x='65' y='58' width='50' height='24' rx='12' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='90' y='74' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3ETALK%3C/text%3E%3Crect x='120' y='58' width='50' height='24' rx='12' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='145' y='74' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3ERETO%3C/text%3E%3Crect x='175' y='58' width='55' height='24' rx='12' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='202' y='74' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3EPRIZE%3C/text%3E%3Crect x='235' y='58' width='50' height='24' rx='12' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='260' y='74' fill='%238888a0' font-size='9' text-anchor='middle' font-family='sans-serif'%3ELIVE%3C/text%3E%3Crect x='15' y='95' width='270' height='65' rx='10' fill='%230a0f1d' stroke='%23ff2d6a' stroke-width='0.5'/%3E%3Ctext x='45' y='125' fill='%23ff2d6a' font-size='18' text-anchor='middle'%3E🎤%3C/text%3E%3Ctext x='60' y='118' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3EDr. Ana Morales%3C/text%3E%3Crect x='175' y='107' width='65' height='14' rx='3' fill='rgba(255,45,106,0.15)'/%3E%3Ctext x='207' y='117' fill='%23ff2d6a' font-size='7' text-anchor='middle' font-family='sans-serif'%3EMain Stage%3C/text%3E%3Ctext x='60' y='135' fill='%238888a0' font-size='9' font-family='sans-serif'%3EIA sin filtro: burbuja, dilemas eticos%3C/text%3E%3Ctext x='60' y='150' fill='%23555' font-size='8' font-family='sans-serif'%3E10:00%3C/text%3E%3Ctext x='265' y='120' fill='%23555' font-size='14'%3E♡%3C/text%3E%3Crect x='15' y='170' width='270' height='50' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='45' y='198' fill='%23ffe600' font-size='14' text-anchor='middle'%3E⚡%3C/text%3E%3Ctext x='60' y='193' fill='%238888a0' font-size='9' font-family='sans-serif'%3ELa Genius Arena ya esta en marcha!%3C/text%3E%3Ctext x='60' y='210' fill='%23555' font-size='8' font-family='sans-serif'%3EHace 5 min%3C/text%3E%3Crect x='15' y='230' width='270' height='75' rx='10' fill='%230a0f1d' stroke='%23f97316' stroke-width='0.5'/%3E%3Ctext x='45' y='260' fill='%23f97316' font-size='18' text-anchor='middle'%3E🎯%3C/text%3E%3Ctext x='60' y='255' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3EReto Flash: Foto en Ramen.exe%3C/text%3E%3Crect x='225' y='244' width='45' height='14' rx='3' fill='rgba(57,255,20,0.1)'/%3E%3Ctext x='247' y='254' fill='%2339ff14' font-size='7' text-anchor='middle' font-family='sans-serif'%3E+20PTS%3C/text%3E%3Ctext x='60' y='273' fill='%238888a0' font-size='9' font-family='sans-serif'%3EVisita el stand y toma una foto%3C/text%3E%3Crect x='60' y='282' width='60' height='18' rx='4' fill='%23ff2d6a'/%3E%3Ctext x='90' y='295' fill='white' font-size='8' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EPLAY →%3C/text%3E%3Crect x='15' y='315' width='270' height='60' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='45' y='345' fill='%23b84dff' font-size='14' text-anchor='middle'%3E💻%3C/text%3E%3Ctext x='60' y='340' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3ECarlos Reyes%3C/text%3E%3Crect x='155' y='328' width='75' height='14' rx='3' fill='rgba(184,77,255,0.15)'/%3E%3Ctext x='192' y='338' fill='%23b84dff' font-size='7' text-anchor='middle' font-family='sans-serif'%3EDeveloper Land%3C/text%3E%3Ctext x='60' y='358' fill='%238888a0' font-size='9' font-family='sans-serif'%3EIngenieria con consecuencias%3C/text%3E%3Ctext x='60' y='370' fill='%23555' font-size='8' font-family='sans-serif'%3E11:30%3C/text%3E%3C/svg%3E" alt="Event Feed">
+    </div>
+    <div class="phone-caption">Feed con filtros por tipo de contenido</div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Tipos de contenido:</h3>
+    <div class="feature-card">
+      <h3>🎤 Speakers / Talks</h3>
+      <p>Charlas programadas con speaker, zona, hora y boton de like.</p>
+    </div>
+    <div class="feature-card">
+      <h3>⚡ Retos Flash</h3>
+      <p>Desafios rapidos con puntos, accesibles directamente desde el feed.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🏆 Concursos (Prize)</h3>
+      <p>Concursos con premios, deadline e informacion de como participar.</p>
+    </div>
+    <div class="feature-card">
+      <h3>📡 Momentos Live</h3>
+      <p>Actualizaciones en tiempo real de lo que sucede en el evento.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 11. AGENDA ==================== -->
+  <section class="section" id="agenda">
+    <div class="section-label">11 / Agenda</div>
+    <h2>Agenda del Evento</h2>
+    <p>
+      Programa completo de Talent Land 2026 organizado por dia y hora, con recordatorios de comida Maruchan integrados.
+    </p>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23050508' width='300' height='400'/%3E%3Ctext x='20' y='30' fill='%23ff2d6a' font-size='14' font-weight='bold' font-family='sans-serif'%3E📅 AGENDA%3C/text%3E%3Crect x='240' y='15' width='50' height='22' rx='4' fill='rgba(255,230,0,0.1)' stroke='%23ffe600' stroke-width='0.5'/%3E%3Ctext x='265' y='30' fill='%23ffe600' font-size='8' text-anchor='middle' font-family='sans-serif'%3E🍜 MARUCHAN%3C/text%3E%3Crect x='15' y='45' width='90' height='30' rx='6' fill='%23ff2d6a'/%3E%3Ctext x='60' y='64' fill='white' font-size='10' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EMartes 7%3C/text%3E%3Crect x='110' y='45' width='85' height='30' rx='6' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='152' y='64' fill='%238888a0' font-size='10' text-anchor='middle' font-family='sans-serif'%3EMiercoles 8%3C/text%3E%3Crect x='200' y='45' width='85' height='30' rx='6' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='242' y='64' fill='%238888a0' font-size='10' text-anchor='middle' font-family='sans-serif'%3EJueves 9%3C/text%3E%3Ctext x='20' y='100' fill='%238888a0' font-size='9' font-family='sans-serif'%3E20 SESSIONS%3C/text%3E%3Ctext x='250' y='100' fill='%238888a0' font-size='9' text-anchor='end' font-family='sans-serif'%3EAPR 7, 2026%3C/text%3E%3Ctext x='20' y='125' fill='%23ff2d6a' font-size='10' font-weight='bold' font-family='sans-serif'%3E10:00%3C/text%3E%3Crect x='50' y='113' width='230' height='3' rx='1' fill='%231a1a28'/%3E%3Crect x='210' y='108' width='75' height='16' rx='4' fill='rgba(255,230,0,0.1)'/%3E%3Ctext x='247' y='119' fill='%23ffe600' font-size='7' text-anchor='middle' font-family='sans-serif'%3E🍜 Desayuno Ramen%3C/text%3E%3Crect x='15' y='135' width='270' height='55' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='25' y='152' fill='%238888a0' font-size='8' font-family='sans-serif'%3E10:00-11:00%3C/text%3E%3Crect x='100' y='141' width='70' height='14' rx='3' fill='rgba(255,45,106,0.1)'/%3E%3Ctext x='135' y='151' fill='%23ff2d6a' font-size='7' text-anchor='middle' font-family='sans-serif'%3EComunidades%3C/text%3E%3Ctext x='25' y='170' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3EDel papel al espacio%3C/text%3E%3Ctext x='25' y='183' fill='%238888a0' font-size='9' font-family='sans-serif'%3EGirlbotics%3C/text%3E%3Ctext x='20' y='215' fill='%23ff2d6a' font-size='10' font-weight='bold' font-family='sans-serif'%3E11:00%3C/text%3E%3Crect x='15' y='225' width='270' height='50' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='25' y='242' fill='%238888a0' font-size='8' font-family='sans-serif'%3E11:00-11:55%3C/text%3E%3Crect x='100' y='231' width='65' height='14' rx='3' fill='rgba(0,229,255,0.1)'/%3E%3Ctext x='132' y='241' fill='%2300e5ff' font-size='7' text-anchor='middle' font-family='sans-serif'%3EFuture Land%3C/text%3E%3Ctext x='25' y='258' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3EEl mayor descubrimiento de la historia%3C/text%3E%3Ctext x='25' y='270' fill='%238888a0' font-size='9' font-family='sans-serif'%3EAythami Soto Rodriguez%3C/text%3E%3Crect x='15' y='285' width='270' height='50' rx='8' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='25' y='302' fill='%238888a0' font-size='8' font-family='sans-serif'%3E11:00-11:30%3C/text%3E%3Crect x='100' y='291' width='70' height='14' rx='3' fill='rgba(249,115,22,0.1)'/%3E%3Ctext x='135' y='301' fill='%23f97316' font-size='7' text-anchor='middle' font-family='sans-serif'%3ECreator Land%3C/text%3E%3Ctext x='25' y='318' fill='%23e8e8f0' font-size='10' font-weight='bold' font-family='sans-serif'%3EIA: como usarla para un negocio%3C/text%3E%3Ctext x='25' y='330' fill='%238888a0' font-size='9' font-family='sans-serif'%3EMario Moreira%3C/text%3E%3C/svg%3E" alt="Agenda">
+    </div>
+    <div class="phone-caption">Agenda con tabs por dia y recordatorios Maruchan</div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Caracteristicas:</h3>
+    <div class="feature-card">
+      <h3>3 dias de evento</h3>
+      <p>Martes 7, Miercoles 8 y Jueves 9 de abril 2026. Cambia entre dias con los tabs superiores.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Recordatorios Maruchan</h3>
+      <p>5 momentos de comida integrados en la agenda: Desayuno, Media manana, Almuerzo, Tarde y Cena.</p>
+    </div>
+    <div class="feature-card">
+      <h3>20+ sesiones por dia</h3>
+      <p>Charlas, keynotes, workshops, paneles y mas, organizados por hora y con su zona/track.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 12. AVATAR ==================== -->
+  <section class="section" id="avatar">
+    <div class="section-label">12 / Avatar</div>
+    <h2>Personalizacion de Avatar</h2>
+    <p>
+      Crea y personaliza tu avatar unico con multiples opciones de piel, cabello, ojos, boca, lentes, ropa y accesorios.
+    </p>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect fill='%23050508' width='300' height='420'/%3E%3Ctext x='20' y='30' fill='%23b84dff' font-size='14' font-weight='bold' font-family='sans-serif'%3E🎮 CHARACTER SELECT%3C/text%3E%3Crect x='30' y='50' width='240' height='200' rx='12' fill='%230a0f1d' stroke='%23b84dff' stroke-width='0.5'/%3E%3Ccircle cx='150' cy='130' r='60' fill='rgba(184,77,255,0.08)'/%3E%3Ctext x='150' y='140' fill='%23e8e8f0' font-size='60' text-anchor='middle'%3E😎%3C/text%3E%3Crect x='100' y='210' width='100' height='30' rx='8' fill='%23ff2d6a'/%3E%3Ctext x='150' y='229' fill='white' font-size='11' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3ESAVE%3C/text%3E%3Crect x='15' y='265' width='270' height='32' rx='6' fill='%230a0f1d'/%3E%3Crect x='17' y='267' width='35' height='28' rx='5' fill='%23b84dff'/%3E%3Ctext x='34' y='285' fill='white' font-size='8' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3ESKIN%3C/text%3E%3Ctext x='70' y='285' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EHAIR%3C/text%3E%3Ctext x='105' y='285' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EH.CLR%3C/text%3E%3Ctext x='138' y='285' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EEYES%3C/text%3E%3Ctext x='172' y='285' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EMOUTH%3C/text%3E%3Ctext x='207' y='285' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3ESPECS%3C/text%3E%3Ctext x='238' y='285' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EGEAR%3C/text%3E%3Ctext x='268' y='285' fill='%238888a0' font-size='8' text-anchor='middle' font-family='sans-serif'%3EACC%3C/text%3E%3Crect x='25' y='310' width='50' height='50' rx='8' fill='%23f5d6b0' stroke='%232a2a3a'/%3E%3Crect x='85' y='310' width='50' height='50' rx='8' fill='%23e8b86d' stroke='%23b84dff' stroke-width='2'/%3E%3Ctext x='110' y='340' fill='%23050508' font-size='14' text-anchor='middle'%3E✓%3C/text%3E%3Crect x='145' y='310' width='50' height='50' rx='8' fill='%23d4a76a' stroke='%232a2a3a'/%3E%3Crect x='205' y='310' width='50' height='50' rx='8' fill='%23a67c52' stroke='%232a2a3a'/%3E%3Crect x='25' y='370' width='50' height='50' rx='8' fill='%238b5e3c' stroke='%232a2a3a'/%3E%3C/svg%3E" alt="Avatar Customizer">
+    </div>
+    <div class="phone-caption">Personalizador de avatar con 9 categorias</div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">9 categorias de personalizacion:</h3>
+    <div class="features-grid">
+      <div class="mini-feature"><h4>SKIN</h4><p>5 tonos de piel</p></div>
+      <div class="mini-feature"><h4>HAIR</h4><p>Estilos de cabello</p></div>
+      <div class="mini-feature"><h4>H.CLR</h4><p>Color de cabello</p></div>
+      <div class="mini-feature"><h4>EYES</h4><p>Tipos de ojos</p></div>
+      <div class="mini-feature"><h4>MOUTH</h4><p>Expresiones</p></div>
+      <div class="mini-feature"><h4>SPECS</h4><p>Lentes / Sin lentes</p></div>
+      <div class="mini-feature"><h4>GEAR</h4><p>Ropa y vestimenta</p></div>
+      <div class="mini-feature"><h4>G.CLR</h4><p>Color de ropa</p></div>
+      <div class="mini-feature"><h4>ACC</h4><p>Accesorios</p></div>
+    </div>
+  </section>
+
+  <!-- ==================== 13. PROFILE ==================== -->
+  <section class="section" id="profile">
+    <div class="section-label">13 / Perfil</div>
+    <h2>Perfil del Jugador</h2>
+    <p>
+      Tu centro de control personal. Muestra tu avatar, estadisticas, estado de notificaciones y opcion de logout.
+    </p>
+
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect fill='%23050508' width='300' height='420'/%3E%3Ctext x='20' y='30' fill='%23ff2d6a' font-size='12' font-weight='bold' font-family='sans-serif'%3E👤 PLAYER PROFILE%3C/text%3E%3Crect x='20' y='50' width='260' height='160' rx='12' fill='%230a0f1d' stroke='%23ff2d6a' stroke-width='0.5'/%3E%3Ctext x='150' y='100' fill='%23e8e8f0' font-size='48' text-anchor='middle'%3E😎%3C/text%3E%3Ctext x='150' y='135' fill='%23e8e8f0' font-size='16' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3EPlayer1%3C/text%3E%3Crect x='115' y='145' width='70' height='22' rx='6' fill='rgba(184,77,255,0.2)' stroke='%23b84dff' stroke-width='0.5'/%3E%3Ctext x='150' y='160' fill='%23b84dff' font-size='9' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E🎮 GAMER%3C/text%3E%3Crect x='40' y='175' width='220' height='28' rx='6' fill='%231a1a28' stroke='%23b84dff' stroke-width='0.5'/%3E%3Ctext x='150' y='193' fill='%23b84dff' font-size='10' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E✏️ CUSTOMIZE%3C/text%3E%3Crect x='20' y='225' width='82' height='70' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='61' y='252' fill='%23ff2d6a' font-size='16' text-anchor='middle'%3E🎟%3C/text%3E%3Ctext x='61' y='272' fill='%23e8e8f0' font-size='18' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E0%3C/text%3E%3Ctext x='61' y='287' fill='%238888a0' font-size='7' text-anchor='middle' font-family='sans-serif'%3ECOUPONS%3C/text%3E%3Crect x='110' y='225' width='82' height='70' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='151' y='252' fill='%23ffe600' font-size='16' text-anchor='middle'%3E⚡%3C/text%3E%3Ctext x='151' y='272' fill='%23e8e8f0' font-size='18' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E0%3C/text%3E%3Ctext x='151' y='287' fill='%238888a0' font-size='7' text-anchor='middle' font-family='sans-serif'%3ERETOS%3C/text%3E%3Crect x='200' y='225' width='82' height='70' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='241' y='252' fill='%2339ff14' font-size='16' text-anchor='middle'%3E🏆%3C/text%3E%3Ctext x='241' y='272' fill='%23e8e8f0' font-size='18' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E0%3C/text%3E%3Ctext x='241' y='287' fill='%238888a0' font-size='7' text-anchor='middle' font-family='sans-serif'%3ELOGROS%3C/text%3E%3Crect x='20' y='310' width='260' height='50' rx='10' fill='%230a0f1d' stroke='%232a2a3a'/%3E%3Ctext x='50' y='335' fill='%238888a0' font-size='16'%3E🔔%3C/text%3E%3Ctext x='70' y='330' fill='%23e8e8f0' font-size='11' font-weight='bold' font-family='sans-serif'%3ENOTIFICATIONS%3C/text%3E%3Ctext x='70' y='348' fill='%23ff2d6a' font-size='9' font-family='sans-serif'%3EDISABLED%3C/text%3E%3Crect x='245' y='325' width='10' height='10' rx='2' fill='%23333'/%3E%3Crect x='20' y='375' width='260' height='36' rx='8' fill='%230a0f1d' stroke='%23ff2d6a' stroke-width='0.5'/%3E%3Ctext x='150' y='398' fill='%23ff2d6a' font-size='11' font-weight='bold' text-anchor='middle' font-family='sans-serif'%3E↪ LOGOUT%3C/text%3E%3C/svg%3E" alt="Perfil">
+    </div>
+    <div class="phone-caption">Perfil con avatar, stats y configuracion</div>
+
+    <h3 style="font-size: 15px; font-weight: 700; margin: 20px 0 12px;">Secciones del perfil:</h3>
+    <div class="feature-card">
+      <h3>Avatar y badge</h3>
+      <p>Tu avatar personalizado, nickname y badge del modo de juego seleccionado.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Estadisticas</h3>
+      <p>Contador de cupones canjeados, retos intentados y logros desbloqueados.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Notificaciones</h3>
+      <p>Estado actual de las notificaciones push con opcion de activarlas.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Logout</h3>
+      <p>Cierra tu sesion y limpia los datos locales para volver a la pantalla de inicio.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 14. NAVIGATION ==================== -->
+  <section class="section" id="navigation">
+    <div class="section-label">14 / Navegacion</div>
+    <h2>Barra de Navegacion</h2>
+    <p>
+      Barra fija en la parte inferior con 5 accesos principales. El boton central (CAM) tiene un diseno hexagonal destacado.
+    </p>
+
+    <div style="display: flex; justify-content: space-around; align-items: center; padding: 16px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); margin: 16px 0;">
+      <div style="text-align: center;">
+        <div style="font-size: 20px;">🏠</div>
+        <div style="font-size: 10px; color: var(--green); font-weight: 600;">HOME</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 20px;">📋</div>
+        <div style="font-size: 10px; color: var(--text-muted);">FEED</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 24px; background: var(--surface-2); padding: 8px; border-radius: 12px; border: 1px solid var(--green);">📷</div>
+        <div style="font-size: 10px; color: var(--green); font-weight: 600;">CAM</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 20px;">🗺️</div>
+        <div style="font-size: 10px; color: var(--text-muted);">MAP</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 20px;">👤</div>
+        <div style="font-size: 10px; color: var(--text-muted);">P1</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 15. TECH ==================== -->
+  <section class="section" id="tech">
+    <div class="section-label">15 / Tecnico</div>
+    <h2>Datos Tecnicos</h2>
+    <p>
+      Informacion tecnica de la aplicacion para referencia del equipo.
+    </p>
+
+    <div class="feature-card">
+      <h3>Tipo de aplicacion</h3>
+      <p>Progressive Web App (PWA) - No requiere descarga desde tiendas.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Tecnologias</h3>
+      <p>Next.js 16 + TypeScript + Tailwind CSS v4 + Prisma + SQLite</p>
+    </div>
+    <div class="feature-card">
+      <h3>Notificaciones</h3>
+      <p>Web Push con VAPID keys via Service Worker</p>
+    </div>
+    <div class="feature-card">
+      <h3>Almacenamiento</h3>
+      <p>Sesion de usuario en localStorage. Datos de juego en base de datos del servidor.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Offline</h3>
+      <p>Service Worker pre-cachea rutas principales para funcionamiento basico sin conexion.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Autenticacion</h3>
+      <p>Basada en localStorage (userId). Sin contrasenas ni datos sensibles.</p>
+    </div>
+
+    <div class="info-box">
+      <h4>Privacidad</h4>
+      <p>La app solo almacena: nickname, modo de juego, configuracion del avatar y estado de notificaciones. No recopila datos personales, ubicacion, ni informacion del dispositivo.</p>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="doc-footer">
+    <div class="footer-brand">Debuggea tu Antojo</div>
+    <p>Maruchan x Talent Land 2026</p>
+    <p style="margin-top: 8px;">Documento generado: Abril 2026</p>
+    <p style="margin-top: 4px; font-size: 11px;">Expo Santa Fe, CDMX | 7-9 Abril 2026</p>
+  </footer>
+
+</body>
+</html>
